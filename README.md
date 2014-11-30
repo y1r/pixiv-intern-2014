@@ -1,4 +1,5 @@
 # Benchmark
+```
 初期状態(workload=1):1641
 初期状態(workload=4):3343
 phpソースのみ変更(workload=1):1662
@@ -6,6 +7,7 @@ phpソースのみ変更(workload=4):3525
 phpソース以外も変更(workload=1):16478
 phpソース以外も変更(workload=4):30548
 phpソース以外も変更(workload=12):43008
+```
 
 # 変更点
 ## PHPソースの変更点
