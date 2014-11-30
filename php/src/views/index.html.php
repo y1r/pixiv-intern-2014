@@ -14,10 +14,9 @@
 </div>
 
 <?php
-$flash = flash_now();
-if (isset($flash['notice'])) {
+if( isInserted('notice') ) {
 ?>
-  <div id="notice-message" class="alert alert-danger" role="alert"><?php echo $flash['notice'] ?></div>
+  <div id="notice-message" class="alert alert-danger" role="alert"><?php echo getInserted('notice') ?></div>
 <?php
 }
 ?>

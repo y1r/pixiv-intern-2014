@@ -12,8 +12,3 @@
       <h1 id="topbar">
         <a href="/"><img src="/images/isucon-bank.png" alt="いすこん銀行 オンラインバンキングサービス"></a>
       </h1>
-      <?php echo $content ?>
-    </div>
-
-  </body>
-</html>

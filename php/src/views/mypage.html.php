@@ -5,14 +5,14 @@
 
 <dl class="dl-horizontal">
   <dt>前回ログイン</dt>
-  <dd id="last-logined-at"><?php echo get('last_login')['created_at'] ?></dd>
+  <dd id="last-logined-at"><?php echo getInserted('last_login')['created_at'] ?></dd>
   <dt>最終ログインIPアドレス</dt>
-  <dd id="last-logined-ip"><?php echo get('last_login')['ip'] ?></dd>
+  <dd id="last-logined-ip"><?php echo getInserted('last_login')['ip'] ?></dd>
 </dl>
 
 <div class="panel panel-default">
   <div class="panel-heading">
-  お客様ご契約ID：<?php echo get('user')['login'] ?> 様の代表口座
+  お客様ご契約ID：<?php echo getInserted('user')['login'] ?> 様の代表口座
   </div>
   <div class="panel-body">
     <div class="row">
