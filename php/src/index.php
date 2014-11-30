@@ -16,7 +16,7 @@ try {
 		]
 	);
 } catch (PDOException $e) {
-	halt("Connection faild: $e");
+	halt("Connection failed: $e");
 }
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -28,6 +28,7 @@ $config = [
 function http_redirect( $url ){
 	header('HTTP/1.1 302 Moved Temporarily');
 	header('Location: ' . $url );
+	exit();
 }
 
 function calculate_password_hash( $password, $salt ){
@@ -86,7 +87,7 @@ function attempt_login($login, $password) {
 		return ['error' => 'locked'];
 	}
 
-	if (!empty($user) && calculate_password_hash($password, $user['salt']) == $user['password_hash']) {
+	if (!empty($user) && calculate_password_hash($password, $user['salt']) === $user['password_hash']) {
 		login_log(true, $login, $user['id']);
 		return ['user' => $user];
 	}
@@ -217,14 +218,14 @@ function getInserted( $type ){
 	return NULL;
 }
 
-if( $_SERVER['QUERY_STRING'] == '/' ){
-	include('views/header.html.php');
-	include('views/index.html.php');
-	include('views/footer.html.php');
+if( $_SERVER['QUERY_STRING'] === '/' ){
+	require('views/header.html.php');
+	require('views/index.html.php');
+	require('views/footer.html.php');
 	exit();
 }
 
-if( $_SERVER['QUERY_STRING'] == '/login' ){
+if( $_SERVER['QUERY_STRING'] === '/login' ){
 	$result = attempt_login($_POST['login'], $_POST['password']);
 	if (!empty($result['user'])) {
 		session_regenerate_id(true);
@@ -248,7 +249,7 @@ if( $_SERVER['QUERY_STRING'] == '/login' ){
 	exit();
 }
 
-if( $_SERVER['QUERY_STRING'] == '/mypage' ){
+if( $_SERVER['QUERY_STRING'] === '/mypage' ){
 	$user = current_user();
 
 	if (empty($user)) {
@@ -258,19 +259,19 @@ if( $_SERVER['QUERY_STRING'] == '/mypage' ){
 	else {
 		insert('user', $user);
 		insert('last_login', last_login());
-		include('views/header.html.php');
-		include('views/mypage.html.php');
-		include('views/footer.html.php');
+		require('views/header.html.php');
+		require('views/mypage.html.php');
+		require('views/footer.html.php');
 	}
 	exit();
 }
 
-if( $_SERVER['QUERY_STRING'] == '/info' ){
+if( $_SERVER['QUERY_STRING'] === '/info' ){
 	phpinfo();
 	exit();
 }
 
-if( $_SERVER['QUERY_STRING'] == '/report' ){
+if( $_SERVER['QUERY_STRING'] === '/report' ){
 	print json_encode([
 		'banned_ips' => banned_ips(),
 		'locked_users' => locked_users()
